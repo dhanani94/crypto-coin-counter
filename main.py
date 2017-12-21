@@ -1,4 +1,4 @@
-from urllib import urlopen
+import urllib2
 from bs4 import BeautifulSoup
 import json
 import datetime
@@ -7,7 +7,11 @@ def get_cur_price(currency_name, verbose=True):
 	if currency_name == "cash":
 		return 1.0
 	url = 'https://coinmarketcap.com/currencies/{}/'.format(currency_name)
-	html = urlopen(url).read()
+	request_headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)' }
+
+	request = urllib2.Request(url, headers=request_headers)
+	html = urllib2.urlopen(request).read()
+
 	soup = BeautifulSoup(html, 'html.parser')
 	price = soup.find("span", {"class": "text-large2"}).string.strip()
 	if verbose:
@@ -39,7 +43,7 @@ def main(log=True):
 
 
 if __name__ == "__main__":
-    main()
+	main()
 
 
 
