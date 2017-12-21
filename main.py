@@ -18,13 +18,13 @@ def create_db_connection():
 
 def save_cur_price(currency, price, cursor=None):
 	print "adding {} price to queue".format(currency)
-	query = "insert into cc_current_price (currency, price) values ('{}',{});"
+	query = "insert into crypto_counter.cc_current_price (currency, price) values ('{}',{});"
 	cursor.execute(query.format(currency, price))
 
 
 def save_wallet_balance(balance, cursor=None):
 	print "wallet balance to queue"
-	query = "insert into cc_wallet_balance (balance) values ({});"
+	query = "insert into crypto_counter.cc_wallet_balance (balance) values ({});"
 	cursor.execute(query.format(balance))
 
 
