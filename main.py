@@ -69,7 +69,7 @@ def process_run():
 		# get current price * holdings for each currency and add to wallet sum
 		for c in data:
 			currency = c[1]
-			holdings = c[2]
+			holdings = float(c[2])
 			print "collecting data for {}".format(currency)
 			wallet_sum = wallet_sum + holdings * get_cur_price(currency,cursor=cursor)
 			time.sleep(5)
