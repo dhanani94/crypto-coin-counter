@@ -52,21 +52,26 @@ def log_wallet_value(wallet_sum, file_name="wallet_log.txt"):
 	f = open(file_name,"a+")
 	f.write("{} ---- {}\n".format(now, wallet_sum))
 
+def get_holdings(cursor):
+	cursor.execute("SELECT * FROM crypto_counter.holdings;")
+	return cursor.fetchall()
 
 def process_run():
 	conn = create_db_connection()
 	cursor = conn.cursor()
 
-	# load the current holdings
-	data = json.load(open('hodl.json'))
-
 	while True:
+		# load the current holdings
+		data = get_holdings(cursor)
+
 		# initialize the wallet sum
 		wallet_sum = 0.0
 		# get current price * holdings for each currency and add to wallet sum
-		for c in data.keys():
-			print "collecting data for {}".format(c)
-			wallet_sum = wallet_sum + data[c] * get_cur_price(c,cursor=cursor)
+		for c in data:
+			currency = c[1]
+			holdings = c[2]
+			print "collecting data for {}".format(currency)
+			wallet_sum = wallet_sum + holdings * get_cur_price(currency,cursor=cursor)
 			time.sleep(5)
 
 		print "Wallet Value is ${}".format(wallet_sum)
@@ -76,7 +81,6 @@ def process_run():
 		print "SAVING TO DATABASE"
 		conn.commit()
 		time.sleep(600)
-
 
 def single_run(log=True, save=False):
 
