@@ -1,14 +1,5 @@
 {
-	"ripple" : 1410.58800000,
-	"tron" : 999.00000000,
-	"stellar" : 999.00000000,
-	"poet" : 624.37500000,
-	"cardano" : 199.80000000,
-	"loopring" : 99.90000000,
-	"enigma-project" : 59.94000000,
-	"omisego" : 9.99000000,
-	"bitcoin" : 0.00366432,
-	"litecoin" : 0.00076461,
-	"ethereum" : 9.40292085,
-	"cash" : 39.45
+	"litecoin" : 86.001,
+	"ethereum" : 86.001,
+	"cash" : 86.001
 }
